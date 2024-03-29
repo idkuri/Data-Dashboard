@@ -14,6 +14,7 @@ function App() {
   const [listState, setlistState] = useState([])
   const [listCity, setlistCity] = useState([])
   const [mode, setMode] = useState(-1) // -1 filter by non 0 filter by country 1 filter by state 2 filter by city
+  const [searchQuery, setSearch] = useState("")
 
 
   async function getData() {
@@ -42,7 +43,8 @@ function App() {
     setlistState(states)
     setlistCountry(country)
     setlistCity(city)
-    const filteredCountries = country.filter(country => countryFilter.includes(country));
+
+    console.log(jsonData)
   }
 
   function addToCountryFilter(name) {
@@ -131,12 +133,12 @@ function App() {
       }
       <div className='App'>
         <div className='buttonContainer'>
-          <input className='searchBar' type='text' placeholder='Search'></input>
+          <input className='searchBar' type='text' onChange={(e) => {setSearch(e.target.value)}}placeholder='Search'></input>
           <button onClick={() => {setOpen(true); setMode(0)}}>Filter By Country</button>
           <button onClick={() => {setOpen(true); setMode(1)}}>Filter By State</button>
           <button onClick={() => {setOpen(true); setMode(2)}}>Filter By City</button>
       </div>
-      <Table data={data} cityFilter={cityFilter} countryFilter={countryFilter} stateFilter={stateFilter}></Table>
+      <Table data={data} cityFilter={cityFilter} countryFilter={countryFilter} stateFilter={stateFilter} searchQuery={searchQuery}></Table>
     </div>
     </>
   )

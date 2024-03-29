@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../App.css"
 
-const Table = ({ data, cityFilter, countryFilter, stateFilter }) => {
+const Table = ({ data, cityFilter, countryFilter, stateFilter, searchQuery }) => {
     // Filter the data based on provided filters
     const [filteredData, setFilterData] = useState([])
 
@@ -20,13 +20,18 @@ const Table = ({ data, cityFilter, countryFilter, stateFilter }) => {
             if (cityFilter.length > 0) {
                 filteredData = filteredData.filter(item => cityFilter.includes(item.city));
             }
+
+            if (searchQuery.length > 0) {
+                filteredData = filteredData.filter(item => item.name.toLowerCase().startsWith(searchQuery.toLowerCase()));
+            }
+
             setFilterData(filteredData);
         }
     }
 
     useEffect(() => {
         filterData()
-    }, [data, countryFilter, cityFilter, stateFilter])
+    }, [data, countryFilter, cityFilter, stateFilter, searchQuery])
 
     return (
         <div className='table'>
