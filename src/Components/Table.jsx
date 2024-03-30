@@ -42,6 +42,7 @@ const Table = ({ data, cityFilter, countryFilter, stateFilter, searchQuery }) =>
                         <div className="tableHeaderCell">Country</div>    
                         <div className="tableHeaderCell">City</div>
                         <div className="tableHeaderCell">State</div>
+                        <div className="tableHeaderCell">Brewery Type</div>
                         <div className="tableHeaderCell">Website</div>
                     </div>
                     {filteredData.map((item, key) => (
@@ -50,6 +51,7 @@ const Table = ({ data, cityFilter, countryFilter, stateFilter, searchQuery }) =>
                             <div className="tableCell">{item.country}</div>
                             <div className="tableCell">{item.city}</div>
                             <div className="tableCell">{item.state}</div>
+                            <div className="tableCell">{item.brewery_type}</div>
                             <div className="tableCell">{item.website_url}</div>
                         </div>
                     ))}

@@ -9,11 +9,11 @@
 .table {
   width: 60vw;
   height: auto;
-  padding-right: 130px;
+  padding-right: 250px;
 }
 .tableRow {
   display: grid;
-  grid-template-columns: repeat(5, 200px);
+  grid-template-columns: repeat(6, 200px);
   grid-template-rows: auto;
   grid-auto-rows: min-content;
 }
@@ -37,7 +37,6 @@
 .buttonContainer {
   display: flex;
   flex-direction: row;
-  padding-top: 15vh;
   align-items: center;
   justify-content: center;
   width: 60vw;
@@ -89,4 +88,14 @@
   width: 100vw;
   height: 100vh;
   color: black;
+}
+
+.statsContainer {
+  display: flex;
+  position: relative;
+  padding-top: 15vh;
+  padding-bottom: 5vh;
+  margin-right: auto;
+  gap: 5vh;
+  flex-direction: column;
 }

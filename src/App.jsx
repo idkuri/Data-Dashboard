@@ -15,6 +15,9 @@ function App() {
   const [listCity, setlistCity] = useState([])
   const [mode, setMode] = useState(-1) // -1 filter by non 0 filter by country 1 filter by state 2 filter by city
   const [searchQuery, setSearch] = useState("")
+  const [countryBrewery, setCountryBrewery] = useState("")
+  const [breweryType, setAmtBreweryType] = useState("")
+  const [totalBrew, setTotalBrew] = useState(0)
 
 
   async function getData() {
@@ -43,20 +46,52 @@ function App() {
     setlistState(states)
     setlistCountry(country)
     setlistCity(city)
-
-    console.log(jsonData)
   }
 
-  function addToCountryFilter(name) {
-    if (countryFilter.includes(name)) {
-      setCountryFilter(countryFilter.filter(item => item !== name));
-    }
-    else {
-      setCountryFilter([...countryFilter, name])
+  function parseData() {
+    let countryHash = {};
+    let typeHash = {};
+    let maxCountryFrequency = 0;
+    let maxTypeFrequency = 0;
+    let countryWithMaxFrequency = '';
+    let commonBreweryType = '';
+
+    if (data != null) {
+        setTotalBrew(data.length)
+        for (let brewery of data) {
+            // Count country frequencies
+            if (!countryHash[brewery.country]) {
+                countryHash[brewery.country] = 1;
+            } else {
+                countryHash[brewery.country]++;
+            }
+            // Count brewery type frequencies
+            if (!typeHash[brewery.brewery_type]) {
+                typeHash[brewery.brewery_type] = 1;
+            } else {
+                typeHash[brewery.brewery_type]++;
+            }
+        }
+
+        for (let country in countryHash) {
+            if (countryHash[country] > maxCountryFrequency) {
+                maxCountryFrequency = countryHash[country];
+                countryWithMaxFrequency = country;
+            }
+        }
+
+        for (let brewType in typeHash) {
+            if (typeHash[brewType] > maxTypeFrequency) {
+                maxTypeFrequency = typeHash[brewType];
+                commonBreweryType = brewType;
+            }
+        }
     }
 
-    console.log(countryFilter)
-  }
+    setCountryBrewery(countryWithMaxFrequency);
+    setAmtBreweryType(commonBreweryType);
+}
+
 
   function addToStateFilter(name) {
     if (stateFilter.includes(name)) {
@@ -119,6 +154,10 @@ function App() {
     getData()
   }, [])
 
+  useEffect(() => {
+    parseData()
+  }, [data])
+
   return (
     <>
       {
@@ -132,8 +171,13 @@ function App() {
         )
       }
       <div className='App'>
+        <div className='statsContainer'>
+          <div>Country with the most amount of breweries: {countryBrewery}</div>
+          <div>Total number of breweries: {totalBrew}</div>
+          <div>Most popular brewery type: {breweryType}</div>
+        </div>
         <div className='buttonContainer'>
-          <input className='searchBar' type='text' onChange={(e) => {setSearch(e.target.value)}}placeholder='Search'></input>
+          <input className='searchBar' type='text' onChange={(e) => {setSearch(e.target.value)}}placeholder='Search by name'></input>
           <button onClick={() => {setOpen(true); setMode(0)}}>Filter By Country</button>
           <button onClick={() => {setOpen(true); setMode(1)}}>Filter By State</button>
           <button onClick={() => {setOpen(true); setMode(2)}}>Filter By City</button>
