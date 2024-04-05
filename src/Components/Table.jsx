@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../App.css"
+import { Link } from "react-router-dom";
+
 
 const Table = ({ data, cityFilter, countryFilter, stateFilter, searchQuery }) => {
     // Filter the data based on provided filters
@@ -43,7 +45,8 @@ const Table = ({ data, cityFilter, countryFilter, stateFilter, searchQuery }) =>
                         <div className="tableHeaderCell">City</div>
                         <div className="tableHeaderCell">State</div>
                         <div className="tableHeaderCell">Brewery Type</div>
-                        <div className="tableHeaderCell">Website</div>
+                        {/* <div className="tableHeaderCell">Website</div> */}
+                        <div className="tableHeaderCell">Details</div>
                     </div>
                     {filteredData.map((item, key) => (
                         <div className='tableRow' key={key}>
@@ -52,7 +55,11 @@ const Table = ({ data, cityFilter, countryFilter, stateFilter, searchQuery }) =>
                             <div className="tableCell">{item.city}</div>
                             <div className="tableCell">{item.state}</div>
                             <div className="tableCell">{item.brewery_type}</div>
-                            <div className="tableCell">{item.website_url}</div>
+                            <div className="tableCell">
+                                <Link to={"/" + item.id}>
+                                    Details
+                                </Link>
+                            </div>
                         </div>
                     ))}
                 </>

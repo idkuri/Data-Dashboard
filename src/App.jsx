@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import Table from './Components/Table'
 import './App.css'
+import { Link } from "react-router-dom";
 
 function App() {
   const [data, setData] = useState(null)
@@ -18,6 +19,7 @@ function App() {
   const [countryBrewery, setCountryBrewery] = useState("")
   const [breweryType, setAmtBreweryType] = useState("")
   const [totalBrew, setTotalBrew] = useState(0)
+  const [isSideBarOpen, setOpenSideBar] = useState(true)
 
 
   async function getData() {
@@ -102,6 +104,19 @@ function App() {
     }
 
   }
+
+
+  function addToCountryFilter(name) {
+    if (countryFilter.includes(name)) {
+      setCountryFilter(countryFilter.filter(item => item !== name));
+    }
+    else {
+      setCountryFilter([...countryFilter, name])
+    }
+
+  }
+
+  
 
   function addToCityFilter(name) {
     if (cityFilter.includes(name)) {
