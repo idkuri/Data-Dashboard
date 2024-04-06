@@ -17,21 +17,21 @@ const DetailsComponent = () => {
 
       useEffect(() => {
         getData()
-      })
+      }, [])
     
     return (
-        (data != null && (
-            <div>
-                <p>Brewery Id: {data.id}</p>
-                <p>Brewery Name: {data.name}</p>
-                <p>Brewery Type: {data.type}</p>
-                <p>Brewery City: {data.city}</p>
-                <p>Brewery Country: {data.country}</p>  
-                <p>Brewery Phone: {data.phone}</p>
-                <p>Brewery Address: {data.street}</p>
-                <p>Brewery Website: {data.website_url}</p>
-            </div>
-        ))
+      (data != null && (
+        <div>
+            <p>Brewery Id: {data.id}</p>
+            <p>Brewery Name: {data.name}</p>
+            <p>Brewery Type: {data.type}</p>
+            <p>Brewery City: {data.city}</p>
+            <p>Brewery Country: {data.country}</p>  
+            <p>Brewery Phone: {data.phone}</p>
+            <p>Brewery Address: {data.street}</p>
+            <p>Brewery Website: {data.website_url}</p>
+        </div>
+    ))
     );
 };
 
