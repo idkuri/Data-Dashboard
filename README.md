@@ -28,7 +28,8 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![dd2](https://github.com/idkuri/Data-Dashboard/assets/78403245/d699e7b8-08eb-43ff-a8e4-31520ab9d559)
+
 
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  
